@@ -31,7 +31,9 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount () {
+
         console.log(this.props);
+
         axios.get( 'https://sandwich-maker-44d7c.firebaseio.com/ingredients.json' )
             .then( response => {
                 this.setState( { ingredients: response.data } );
@@ -93,6 +95,7 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         // alert('You continue!');
+
         
         const queryParams = [];
         for (let i in this.state.ingredients) {
@@ -104,6 +107,29 @@ class BurgerBuilder extends Component {
             pathname: '/checkout',
             search: '?' + queryString
         });
+
+        this.setState( { loading: true } );
+        const order = {
+            ingredients: this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Jeryl Chamos',
+                address: {
+                    street: 'goofystreet 2312',
+                    zipCode: '18231',
+                    country: 'UK'
+                },
+                email: 'goof@goof.com'
+            },
+            deliveryMethod: 'fastest'
+        }
+        axios.post( '/orders.json', order )
+            .then( response => {
+                this.setState( { loading: false, purchasing: false } );
+            } )
+            .catch( error => {
+                this.setState( { loading: false, purchasing: false } );
+            } );
     }
 
     render () {
