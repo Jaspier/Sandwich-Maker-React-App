@@ -6,22 +6,22 @@ import classes from './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
-const sideDrawer = ( props ) => {
+const sideDrawer = (props) => {
     let attachedClasses = [classes.SideDrawer, classes.Close];
     if (props.open) {
         attachedClasses = [classes.SideDrawer, classes.Open];
     }
-    return (
+    return(
         <Aux>
-            <Backdrop show={props.open} clicked={props.closed}/>
-            <div className={attachedClasses.join(' ')}>
-                <div className={classes.Logo}>
-                    <Logo />
-                </div>
-                <nav>
-                    <NavigationItems />
-                </nav>
+        <Backdrop show={props.open} clicked={props.closed}/>
+        <div className={attachedClasses.join(' ')}>
+            <div className={classes.Logo}>
+                <Logo />
             </div>
+            <nav>
+                <NavigationItems isAuthenticated={props.isAuth}/>
+            </nav>
+        </div>
         </Aux>
     );
 };
