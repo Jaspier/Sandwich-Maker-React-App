@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
-import Burger from '../../components/Burger/Burger';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Sandwich from '../../components/Sandwich/Sandwich';
+import BuildControls from '../../components/Sandwich/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import OrderSummary from '../../components/Sandwich/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-orders';
 
-export class BurgerBuilder extends Component {
+export class SandwichMaker extends Component {
     state = {
         purchasing: false
     }
@@ -37,7 +37,7 @@ export class BurgerBuilder extends Component {
         if (this.props.isAuthenticated) {
             this.setState({purchasing: true});
         } else {
-            this.props.onSetAuthRedirectPath('/checkout'); // sets path to '/checkout' only if user built a burger before sign in
+            this.props.onSetAuthRedirectPath('/checkout'); // sets path to '/checkout' only if user built a sandwich before sign in
             this.props.history.push('/auth');
         } 
     }
@@ -60,12 +60,12 @@ export class BurgerBuilder extends Component {
         }
 
         let orderSummary = null;
-        let burger = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
+        let sandwich = this.props.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
 
         if (this.props.ings) {
-            burger = (
+            sandwich = (
                 <Aux>
-                    <Burger ingredients={this.props.ings}/>
+                    <Sandwich ingredients={this.props.ings}/>
                     <BuildControls 
                         ingredientAdded={this.props.onIngredientAdded}
                         ingredientRemoved={this.props.onIngredientRemoved}
@@ -88,7 +88,7 @@ export class BurgerBuilder extends Component {
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     {orderSummary}
                 </Modal>
-                {burger}
+                {sandwich}
             </Aux>
         );
     }
@@ -96,9 +96,9 @@ export class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.burgerBuilder.ingredients,
-        price: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error,
+        ings: state.sandwichMaker.ingredients,
+        price: state.sandwichMaker.totalPrice,
+        error: state.sandwichMaker.error,
         isAuthenticated: state.auth.token !== null
     };
 }
@@ -113,4 +113,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(SandwichMaker, axios));

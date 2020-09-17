@@ -1,36 +1,36 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
-export const purchaseBurgerSuccess = (id, orderData) => { //sync
+export const purchaseSandwichSuccess = (id, orderData) => { //sync
     return {
-        type: actionTypes.PURCHASE_BURGER_SUCCESS,
+        type: actionTypes.PURCHASE_SANDWICH_SUCCESS,
         orderId: id,
         orderData: orderData
     };
 };
- export const purchaseBurgerFail = (error) => { //sync
+ export const purchaseSandwichFail = (error) => { //sync
     return {
-        type: actionTypes.PURCHASE_BURGER_FAIL,
+        type: actionTypes.PURCHASE_SANDWICH_FAIL,
         error: error
     };
 }
 
-export const purchaseBurgerStart = () => {
+export const purchaseSandwichStart = () => {
     return {
-        type: actionTypes.PURCHASE_BURGER_START
+        type: actionTypes.PURCHASE_SANDWICH_START
     };
 };
 
-export const purchaseBurger = (orderData, token) => { //async
+export const purchaseSandwich = (orderData, token) => { //async
     return dispatch => {
-        dispatch(purchaseBurgerStart());
+        dispatch(purchaseSandwichStart());
         axios.post('/orders.json?auth=' + token, orderData)
             .then(response => {
                 //console.log(response.data);
-                dispatch(purchaseBurgerSuccess(response.data.name, orderData));
+                dispatch(purchaseSandwichSuccess(response.data.name, orderData));
             })
             .catch(error => {
-               dispatch(purchaseBurgerFail(error));
+               dispatch(purchaseSandwichFail(error));
             });
     };
 }; 

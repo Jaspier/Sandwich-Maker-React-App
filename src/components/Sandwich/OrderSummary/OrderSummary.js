@@ -20,7 +20,7 @@ class OrderSummary extends Component {
         return (
             <Aux>
                 <h3>Your Order</h3>
-                <p>A delicious Burger with the following ingredients:</p>
+                <p>A delicious Sandwich with the following ingredients:</p>
                 <ul>
                     {ingredientSummary}
                 </ul>

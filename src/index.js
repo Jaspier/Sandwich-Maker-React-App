@@ -8,14 +8,14 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import sandwichMakerReducer from './store/reducers/sandwichMaker';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // compose allows us to combine enhancers together
 
 const rootReducer = combineReducers({
-    burgerBuilder: burgerBuilderReducer,
+    sandwichMaker: sandwichMakerReducer,
     order: orderReducer,
     auth: authReducer
 });

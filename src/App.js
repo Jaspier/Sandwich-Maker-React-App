@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
 import Layout from './hoc/Layout/Layout';
-import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import SandwichMaker from './containers/SandwichMaker/SandwichMaker';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 
@@ -29,7 +29,7 @@ class App extends Component {
     let routes = ( // routes for unauthenticated users
       <Switch>
         <Route path="/auth" component={asyncAuth} />
-        <Route path="/" exact component={BurgerBuilder} />
+        <Route path="/" exact component={SandwichMaker} />
         <Redirect to="/" />
       </Switch>
     );
@@ -41,7 +41,7 @@ class App extends Component {
           <Route path="/orders" component={asyncOrders} />
           <Route path="/logout" component={Logout} />
           <Route path="/auth" component={asyncAuth} />
-          <Route path="/" exact component={BurgerBuilder} />
+          <Route path="/" exact component={SandwichMaker} />
           <Redirect to="/" />
         </Switch>
       );
